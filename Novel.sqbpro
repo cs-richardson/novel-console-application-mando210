@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/MikiAndo/Novel1.db" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2220"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="Consumer"/><default_encoding codec=""/><browse_table_settings><table schema="" name="" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="Author" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="Consumer" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="ConsumerPurchaseNovel" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="Novel" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort/><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">PRAGMA foreign_keys = 0;
+
+DROP TABLE IF EXISTS &quot;Author&quot;;
+
+CREATE TABLE Author
+(
+	AuthorID 	INTEGER NOT NULL,
+	AuthorName 	VARCHAR(50) NOT NULL,
+	Nationality	VARCHAR(50) NULL,
+	PRIMARY KEY (AuthorID)
+);
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Hinata Nakashima', 'Japanese');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Jessika Kröger', 'German');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Davin Abraham', 'American');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Nuru Ayodele', 'South African');
+
+DROP TABLE IF EXISTS &quot;Consumer&quot;;
+CREATE TABLE Consumer
+(
+	ConsumerID 	INTEGER NOT NULL,
+	ConsumerName VARCHAR(50) NOT NULL,
+PhoneNumber VARCHAR(11) NOT NULL,
+PRIMARY KEY (ConsumerID)
+);
+INSERT INTO Consumer (ConsumerName, PhoneNumber)  VALUES ('Ando, Miki', '09011762222');
+INSERT INTO Consumer (ConsumerName, PhoneNumber) VALUES ('Brown, Bryan', '08084191498');
+INSERT INTO Consumer (ConsumerName, PhoneNumber) VALUES ('Robertson, Amy', '08084191498');
+INSERT INTO Consumer (ConsumerName, PhoneNumber) VALUES ('Smith, Jason', '09617491823');
+
+DROP TABLE IF EXISTS &quot;Novel&quot;;
+CREATE TABLE Novel
+(
+	ISBN 		VARCHAR(13) NOT NULL,
+	Genre 		VARCHAR(50) NOT NULL,
+	Title		VARCHAR(200) NOT NULL,
+	AuthorID	INTEGER NOT NULL,
+	PRIMARY KEY (ISBN),
+	FOREIGN KEY (AuthorID) REFERENCES Author (AuthorID)
+);
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9780063473508, 'Mystery', 'The Door Outside', 2); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9783179227744, 'Fantasy', 'How to Train an Unicorn', 3 ); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9784214776913, 'Scientific Fiction', '2100', 1); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9787128174967, 'Fantasy', 'The Dwarf', 4 );
+
+DROP TABLE IF EXISTS &quot;ConsumerPurchaseNovel&quot;;
+CREATE TABLE ConsumerPurchaseNovel 
+(
+	ConsumerID 	INTEGER NOT NULL,
+	ISBN		VARCHAR(13) NOT NULL,
+	DatePurchased DATE NOT NULL,
+	NumPurchased VARCHAR(3) NOT NULL,
+	PRIMARY KEY (ConsumerID, ISBN, DatePurchased),
+	FOREIGN KEY (ConsumerID) REFERENCES Consumer (ConsumerID),
+FOREIGN KEY (ISBN) REFERENCES Novel (ISBN)
+);
+INSERT INTO ConsumerPurchaseNovel (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (3, 9780063473508, '10/22/2009', 3);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (1, 9787128174967, '04/24/2010', 1);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (2, 9783179227744, '01/05/2011', 1);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (3, 9783179227744, '01/05/2011', 2);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (3, 9784214776913, '05/15/2011', 2);
+INSERT INTO ConsumerPurchaseNovel (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (4, 9787128174967, '03/31/2019', 5);
+</sql><sql name="SQL 1"></sql><sql name="SQL 1">PRAGMA foreign_keys = 0;
+
+DROP TABLE IF EXISTS &quot;Author&quot;;
+
+CREATE TABLE Author
+(
+	AuthorID 	INTEGER NOT NULL,
+	AuthorName 	VARCHAR(50) NOT NULL,
+	Nationality	VARCHAR(50) NULL,
+	PRIMARY KEY (AuthorID)
+);
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Hinata Nakashima', 'Japanese');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Jessika Kröger', 'German');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Davin Abraham', 'American');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Nuru Ayodele', 'South African');
+
+DROP TABLE IF EXISTS &quot;Consumer&quot;;
+CREATE TABLE Consumer
+(
+	ConsumerID 	INTEGER NOT NULL,
+	LastName VARCHAR (50) NOT NULL,
+	FirstName VARCHAR (50) NOT NULL,
+PhoneNumber VARCHAR(11) NOT NULL,
+PRIMARY KEY (ConsumerID)
+);
+INSERT INTO Consumer (LastName, FirstName, PhoneNumber)  VALUES ('Ando' , 'Miki', '09011762222');
+INSERT INTO Consumer (LastName, FirstName, PhoneNumber) VALUES ('Brown' , 'Bryan', '08084191498');
+INSERT INTO Consumer (LastName, FirstName, PhoneNumber) VALUES ('Robertson' , 'Amy', '08084191498');
+INSERT INTO Consumer (LastName, FirstName, PhoneNumber) VALUES ('Smith' , 'Jason', '09617491823');
+
+DROP TABLE IF EXISTS &quot;Novel&quot;;
+CREATE TABLE Novel
+(
+	ISBN 		VARCHAR(13) NOT NULL,
+	Genre 		VARCHAR(50) NOT NULL,
+	Title		VARCHAR(200) NOT NULL,
+	AuthorID	INTEGER NOT NULL,
+	PRIMARY KEY (ISBN),
+	FOREIGN KEY (AuthorID) REFERENCES Author (AuthorID)
+);
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9780063473508, 'Mystery', 'The Door Outside', 2); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9783179227744, 'Fantasy', 'How to Train an Unicorn', 3 ); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9784214776913, 'Scientific Fiction', '2100', 1); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9787128174967, 'Fantasy', 'The Dwarf', 4 );
+
+DROP TABLE IF EXISTS &quot;ConsumerPurchaseNovel&quot;;
+CREATE TABLE ConsumerPurchaseNovel 
+(
+	ConsumerID 	INTEGER NOT NULL,
+	ISBN		VARCHAR(13) NOT NULL,
+	DatePurchased DATE NOT NULL,
+	NumPurchased VARCHAR(3) NOT NULL,
+	PRIMARY KEY (ConsumerID, ISBN, DatePurchased),
+	FOREIGN KEY (ConsumerID) REFERENCES Consumer (ConsumerID),
+FOREIGN KEY (ISBN) REFERENCES Novel (ISBN)
+);
+INSERT INTO ConsumerPurchaseNovel (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (3, 9780063473508, '10/22/2009', 3);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (1, 9787128174967, '04/24/2010', 1);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (2, 9783179227744, '01/05/2011', 1);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (3, 9783179227744, '01/05/2011', 2);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (3, 9784214776913, '05/15/2011', 2);
+INSERT INTO ConsumerPurchaseNovel (ConsumerID, ISBN, DatePurchased, NumPurchased) 
+VALUES (4, 9787128174967, '03/31/2019', 5);
+</sql><sql name="SQL 1">PRAGMA foreign_keys = 0;
+
+DROP TABLE IF EXISTS &quot;Author&quot;;
+
+CREATE TABLE Author
+(
+	AuthorID 	INTEGER NOT NULL,
+	AuthorName 	VARCHAR(50) NOT NULL,
+	Nationality	VARCHAR(50) NULL,
+	PRIMARY KEY (AuthorID)
+);
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Hinata Nakashima', 'Japanese');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Jessika Kröger', 'German');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Davin Abraham', 'American');
+INSERT INTO Author (AuthorName, Nationality) VALUES ('Nuru Ayodele', 'South African');
+
+DROP TABLE IF EXISTS &quot;Consumer&quot;;
+CREATE TABLE Consumer
+(
+	ConsumerID 	INTEGER NOT NULL,
+	LastName VARCHAR (50) NOT NULL,
+	FirstName VARCHAR (50) NOT NULL,
+PhoneNumber VARCHAR(11) NOT NULL,
+PRIMARY KEY (ConsumerID)
+);
+INSERT INTO Consumer (LastName, FirstName, PhoneNumber)  VALUES ('Ando' , 'Miki', '09011762222');
+INSERT INTO Consumer (LastName, FirstName, PhoneNumber) VALUES ('Brown' , 'Bryan', '08084191498');
+INSERT INTO Consumer (LastName, FirstName, PhoneNumber) VALUES ('Robertson' , 'Amy', '08084191498');
+INSERT INTO Consumer (LastName, FirstName, PhoneNumber) VALUES ('Smith' , 'Jason', '09617491823');
+
+DROP TABLE IF EXISTS &quot;Novel&quot;;
+CREATE TABLE Novel
+(
+	NovelID INTEGER NOT NULL,
+	ISBN 		VARCHAR(13) NOT NULL,
+	Genre 		VARCHAR(50) NOT NULL,
+	Title		VARCHAR(200) NOT NULL,
+	AuthorID	INTEGER NOT NULL,
+	PRIMARY KEY (NovelID),
+	FOREIGN KEY (AuthorID) REFERENCES Author (AuthorID)
+);
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9780063473508, 'Mystery', 'The Door Outside', 2); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9783179227744, 'Fantasy', 'How to Train an Unicorn', 3 ); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9784214776913, 'Scientific Fiction', '2100', 1); 
+INSERT INTO Novel (ISBN, Genre, Title, AuthorID) 
+VALUES (9787128174967, 'Fantasy', 'The Dwarf', 4 );
+
+DROP TABLE IF EXISTS &quot;ConsumerPurchaseNovel&quot;;
+CREATE TABLE ConsumerPurchaseNovel 
+(
+	ConsumerID 	INTEGER NOT NULL,
+	NovelID		INTEGER NOT NULL,
+	DatePurchased DATE NOT NULL,
+	NumPurchased VARCHAR(3) NOT NULL,
+	PRIMARY KEY (ConsumerID, NovelID, DatePurchased),
+	FOREIGN KEY (ConsumerID) REFERENCES Consumer (ConsumerID),
+FOREIGN KEY (NovelID) REFERENCES Novel (NoveIID)
+);
+INSERT INTO ConsumerPurchaseNovel (ConsumerID, NovelID, DatePurchased, NumPurchased) 
+VALUES (3, 1, '10/22/2009', 3);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, NovelID, DatePurchased, NumPurchased) 
+VALUES (1, 4, '04/24/2010', 1);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, NovelID, DatePurchased, NumPurchased) 
+VALUES (2, 2, '01/05/2011', 1);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, NovelID, DatePurchased, NumPurchased) 
+VALUES (3, 2, '01/05/2011', 2);
+INSERT INTO ConsumerPurchaseNovel  (ConsumerID, NovelID, DatePurchased, NumPurchased) 
+VALUES (3, 3, '05/15/2011', 2);
+INSERT INTO ConsumerPurchaseNovel (ConsumerID, NovelID, DatePurchased, NumPurchased) 
+VALUES (4, 4, '03/31/2019', 5);
+</sql><current_tab id="3"/></tab_sql></sqlb_project>
