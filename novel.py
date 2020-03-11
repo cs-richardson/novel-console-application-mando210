@@ -3,7 +3,9 @@ Novel Python Application
 
 This program allows users to order novel, register as a new member in order
 to order books, view the list of novels, view the list of authors, and view
-the purchase report of customers by getting data from the database.
+the purchase report of customers by getting data from the database. To order,
+the customers need to register as a member first. The purchase list will be updated
+after each person's order in the order of their consumer ID. 
 
 Miki Ando
 '''
@@ -243,4 +245,4 @@ def render_consumer_register():
 # Start here: loop the main menu until the user choses the exit option
 while(render_menu()):
     print("\n" + ("="*60))
-    print("\n\nWelcome to our reservation system")
+    print("\n\nWelcome to our Book Store")
